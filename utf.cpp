@@ -2,21 +2,21 @@
 #include "unicode_data.h"
 
 using namespace std;
-using namespace pence;
+using namespace utf;
 
 // exception constructor
-pence::encode_error::encode_error(string error_message) {
+utf::encode_error::encode_error(string error_message) {
   // set the error message
   message = error_message;
 }
 
 // get the error message
-string pence::encode_error::get_message() {
+string utf::encode_error::get_message() {
   // return the error message
   return message;
 }
 
-encoding_type pence::detect_encoding(string &input) {
+encoding_type utf::detect_encoding(string &input) {
   // look for 4-byte BOM
   if (input.size() >= 4) {
     // UTF32BE
@@ -67,7 +67,7 @@ encoding_type pence::detect_encoding(string &input) {
   return ENCODING_UNKNOWN;
 }
 
-bool pence::is_valid(string &input, encoding_type encoding) {
+bool utf::is_valid(string &input, encoding_type encoding) {
   // start at the beginning
   size_t pos = 0;
   while (pos < input.size()) {
@@ -84,7 +84,7 @@ bool pence::is_valid(string &input, encoding_type encoding) {
   return true;
 }
 
-string pence::convert_encoding(string &input, encoding_type input_encoding, encoding_type output_encoding, bool include_bom) {
+string utf::convert_encoding(string &input, encoding_type input_encoding, encoding_type output_encoding, bool include_bom) {
   // basic error checking
   if (input_encoding != ENCODING_ASCII && input_encoding != ENCODING_UTF8 &&
       input_encoding != ENCODING_UTF16BE && input_encoding != ENCODING_UTF16LE &&
@@ -196,7 +196,7 @@ string pence::convert_encoding(string &input, encoding_type input_encoding, enco
   return result;
 }
 
-size_t pence::get_char_size(string &input, size_t pos, encoding_type encoding) {
+size_t utf::get_char_size(string &input, size_t pos, encoding_type encoding) {
   // check the range of pos
   if (pos >= input.size())
     throw encode_error("index out of range");
@@ -369,7 +369,7 @@ size_t pence::get_char_size(string &input, size_t pos, encoding_type encoding) {
   return 0;
 }
 
-uint32_t pence::get_char(string &input, size_t pos, encoding_type encoding) {
+uint32_t utf::get_char(string &input, size_t pos, encoding_type encoding) {
   // make sure there is a character at pos
   size_t size = get_char_size(input, pos, encoding);
   if (size == 0)
@@ -419,7 +419,7 @@ uint32_t pence::get_char(string &input, size_t pos, encoding_type encoding) {
   return 0;
 }
 
-void pence::set_char(string &input, size_t pos, uint32_t code_point, encoding_type encoding) {
+void utf::set_char(string &input, size_t pos, uint32_t code_point, encoding_type encoding) {
   // get the size of the code point to replace
   size_t old_size = get_char_size(input, pos, encoding);
 
@@ -437,7 +437,7 @@ void pence::set_char(string &input, size_t pos, uint32_t code_point, encoding_ty
     input = input.substr(0, pos)+new_code_point+input.substr(pos+new_code_point.size(), input.size()-(pos+new_code_point.size()));
 }
 
-void pence::add_char(string &input, uint32_t code_point, encoding_type encoding) {
+void utf::add_char(string &input, uint32_t code_point, encoding_type encoding) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -543,7 +543,7 @@ void pence::add_char(string &input, uint32_t code_point, encoding_type encoding)
   }
 }
 
-bool pence::is_alpha(uint32_t code_point) {
+bool utf::is_alpha(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -556,7 +556,7 @@ bool pence::is_alpha(uint32_t code_point) {
   return false;
 }
 
-bool pence::is_upper(uint32_t code_point) {
+bool utf::is_upper(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -569,7 +569,7 @@ bool pence::is_upper(uint32_t code_point) {
   return false;
 }
 
-bool pence::is_lower(uint32_t code_point) {
+bool utf::is_lower(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -582,7 +582,7 @@ bool pence::is_lower(uint32_t code_point) {
   return false;
 }
 
-bool pence::is_title(uint32_t code_point) {
+bool utf::is_title(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -595,7 +595,7 @@ bool pence::is_title(uint32_t code_point) {
   return false;
 }
 
-bool pence::is_numeric(uint32_t code_point) {
+bool utf::is_numeric(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -608,7 +608,7 @@ bool pence::is_numeric(uint32_t code_point) {
   return false;
 }
 
-bool pence::is_whitespace(uint32_t code_point) {
+bool utf::is_whitespace(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -621,7 +621,7 @@ bool pence::is_whitespace(uint32_t code_point) {
   return false;
 }
 
-bool pence::is_newline(uint32_t code_point) {
+bool utf::is_newline(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -634,7 +634,7 @@ bool pence::is_newline(uint32_t code_point) {
   return false;
 }
 
-uint32_t pence::to_upper(uint32_t code_point) {
+uint32_t utf::to_upper(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -650,7 +650,7 @@ uint32_t pence::to_upper(uint32_t code_point) {
   return code_point;
 }
 
-uint32_t pence::to_lower(uint32_t code_point) {
+uint32_t utf::to_lower(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");
@@ -666,7 +666,7 @@ uint32_t pence::to_lower(uint32_t code_point) {
   return code_point;
 }
 
-uint32_t pence::to_title(uint32_t code_point) {
+uint32_t utf::to_title(uint32_t code_point) {
   // make sure the code point is within the valid range
   if (code_point > 0x10FFFF)
     throw encode_error("invalid code point");

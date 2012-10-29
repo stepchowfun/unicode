@@ -3,8 +3,6 @@
   by the Unicode Consortium.  UnicodeData.txt can be found at:
 
   http://www.unicode.org/Public/6.1.0/ucd/UnicodeData.txt
-
-  This header was compiled from the script in support/unicode_data/.
 */
 
 #ifndef UNICODE_DATA_H
