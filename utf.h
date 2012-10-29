@@ -2,13 +2,13 @@
   Portable ASCII and Unicode string manipulation functions.
 */
 
-#ifndef PENCE_UTF_H
-#define PENCE_UTF_H
+#ifndef UTF_H
+#define UTF_H
 
 #include <string>
 #include <stdint.h>
 
-namespace pence {
+namespace utf {
 
   // exception for encoding errors
   class encode_error {
