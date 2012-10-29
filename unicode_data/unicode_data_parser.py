@@ -5,10 +5,14 @@
 # uppercase, etc.
 
 # It is unnecessary to run this script unless a new version of UnicodeData.txt
-# is published by the Unicode Consortium.  The current version is 6.1.0, and
-# can be found at:  http://www.unicode.org/Public/6.1.0/ucd/UnicodeData.txt
+# is published by the Unicode Consortium.  At the time of this writing, the
+# current version is 6.2.0.
 
-# To run this script, simply execute it with no arguments from this directory.
+# Upgrade procedure:
+# 1. Replace the UnicodeData.txt file in this directory with an updated version
+#    from the Unicode Consortium.
+# 2. Run this script with no arguments from this directory.
+#    It will overwrite unicode_data.h in the parent directory.
 
 CODE_POINT_NULL = "FFFFFFFF"
 
