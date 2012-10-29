@@ -6,13 +6,11 @@ using namespace utf;
 
 // exception constructor
 utf::encode_error::encode_error(string error_message) {
-  // set the error message
   message = error_message;
 }
 
 // get the error message
 string utf::encode_error::get_message() {
-  // return the error message
   return message;
 }
 
@@ -194,6 +192,20 @@ string utf::convert_encoding(string &input, encoding_type input_encoding, encodi
 
   // return the result
   return result;
+}
+
+size_t utf::get_length(std::string &input, encoding_type encoding) {
+  // do a linear walk through the string to count each code point
+  size_t size = 0;
+  size_t pos = 0;
+  while (pos < input.size()) {
+    size_t char_size = get_char_size(input, pos, encoding);
+    if (!char_size)
+      throw encode_error("invalid code point");
+    pos += char_size;
+    ++size;
+  }
+  return size;
 }
 
 size_t utf::get_char_size(string &input, size_t pos, encoding_type encoding) {
