@@ -1,0 +1,1 @@
+Portable ASCII and Unicode string manipulation functions.
