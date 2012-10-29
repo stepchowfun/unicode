@@ -1,5 +1,5 @@
 /*
-  Portable ASCII and Unicode string manipulation functions.
+  Portable ASCII and Unicode string manipulation functions for C++.
 */
 
 #ifndef UTF_H
