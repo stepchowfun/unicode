@@ -44,6 +44,9 @@ namespace utf {
   // convert a string from one encoding to another
   std::string convert_encoding(std::string &input, encoding_type input_encoding, encoding_type output_encoding, bool include_bom);
 
+  // get the number of code points in a string
+  size_t get_length(std::string &input, encoding_type encoding);
+
   // return the number of bytes of the code point at pos, or 0 if the byte index does not refer to a valid code point
   size_t get_char_size(std::string &input, size_t pos, encoding_type encoding);
 
