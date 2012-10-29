@@ -1,8 +1,5 @@
 /*
-  Unicode Character data taken from UnicodeData.txt as published
-  by the Unicode Consortium.  UnicodeData.txt can be found at:
-
-  http://www.unicode.org/Public/6.1.0/ucd/UnicodeData.txt
+  This header was compiled from unicode_data/unicode_data_parser.py.
 */
 
 #ifndef UNICODE_DATA_H
