@@ -14,7 +14,7 @@ string utf::encode_error::get_message() {
   return message;
 }
 
-encoding_type utf::detect_encoding(string &input) {
+encoding_type utf::detect_encoding(const string &input) {
   // look for 4-byte BOM
   if (input.size() >= 4) {
     // UTF32BE
@@ -65,7 +65,7 @@ encoding_type utf::detect_encoding(string &input) {
   return ENCODING_UNKNOWN;
 }
 
-bool utf::is_valid(string &input, encoding_type encoding) {
+bool utf::is_valid(const string &input, encoding_type encoding) {
   // start at the beginning
   size_t pos = 0;
   while (pos < input.size()) {
@@ -82,7 +82,7 @@ bool utf::is_valid(string &input, encoding_type encoding) {
   return true;
 }
 
-string utf::convert_encoding(string &input, encoding_type input_encoding, encoding_type output_encoding, bool include_bom) {
+string utf::convert_encoding(const string &input, encoding_type input_encoding, encoding_type output_encoding, bool include_bom) {
   // basic error checking
   if (input_encoding != ENCODING_ASCII && input_encoding != ENCODING_UTF8 &&
       input_encoding != ENCODING_UTF16BE && input_encoding != ENCODING_UTF16LE &&
@@ -194,7 +194,7 @@ string utf::convert_encoding(string &input, encoding_type input_encoding, encodi
   return result;
 }
 
-size_t utf::get_length(std::string &input, encoding_type encoding) {
+size_t utf::get_length(const std::string &input, encoding_type encoding) {
   // do a linear walk through the string to count each code point
   size_t size = 0;
   size_t pos = 0;
@@ -208,7 +208,7 @@ size_t utf::get_length(std::string &input, encoding_type encoding) {
   return size;
 }
 
-size_t utf::get_char_size(string &input, size_t pos, encoding_type encoding) {
+size_t utf::get_char_size(const string &input, size_t pos, encoding_type encoding) {
   // check the range of pos
   if (pos >= input.size())
     throw encode_error("index out of range");
@@ -381,7 +381,7 @@ size_t utf::get_char_size(string &input, size_t pos, encoding_type encoding) {
   return 0;
 }
 
-uint32_t utf::get_char(string &input, size_t pos, encoding_type encoding) {
+uint32_t utf::get_char(const string &input, size_t pos, encoding_type encoding) {
   // make sure there is a character at pos
   size_t size = get_char_size(input, pos, encoding);
   if (size == 0)
