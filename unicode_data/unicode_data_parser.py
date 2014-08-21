@@ -6,7 +6,7 @@
 
 # It is unnecessary to run this script unless a new version of UnicodeData.txt
 # is published by the Unicode Consortium.  At the time of this writing, the
-# current version is 6.2.0.
+# current version is 7.0.
 
 # Upgrade procedure:
 # 1. Replace the UnicodeData.txt file in this directory with an updated version
