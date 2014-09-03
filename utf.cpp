@@ -670,7 +670,7 @@ uint32_t utf::to_lower(uint32_t code_point) {
   // search the table
   for (size_t i = 0; i < NUM_LETTERS; i++) {
     if (code_point == letters[i].code_point) {
-      if (letters[i].upper_version != CODE_POINT_NULL)
+      if (letters[i].lower_version != CODE_POINT_NULL)
         return letters[i].lower_version;
       break;
     }
@@ -686,7 +686,7 @@ uint32_t utf::to_title(uint32_t code_point) {
   // search the table
   for (size_t i = 0; i < NUM_LETTERS; i++) {
     if (code_point == letters[i].code_point) {
-      if (letters[i].upper_version != CODE_POINT_NULL)
+      if (letters[i].title_version != CODE_POINT_NULL)
         return letters[i].title_version;
       break;
     }
